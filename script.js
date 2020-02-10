@@ -1,7 +1,6 @@
 let operations = {
     add : function(a,b){
-        return a + b;
-        
+        return a + b;      
         
     },
 
@@ -28,15 +27,15 @@ const addToNum = function(text){
         calc.disabled = true;
     }
     
-    console.log(`num1 ${num1}`)
-    console.log(`num2 ${num2}`)
-    console.log(`operator ${operator}`)
-}
+    console.log(`num1 ${num1}`);
+    console.log(`num2 ${num2}`);
+    console.log(`operator ${operator}`);
+};
 
 num = document.querySelectorAll('.num');
 op = document.querySelectorAll('.op');
-calc = document.querySelector('.calc')
-clr = document.querySelector('.clr')
+calc = document.querySelector('.calc');
+clr = document.querySelector('.clr');
 
 calc.disabled = true;
 
@@ -54,33 +53,33 @@ operators.set('/', operations.divide);
 
 
 num.forEach(element => {
-    element.addEventListener("click", () => addToNum(element.textContent))
-})
+    element.addEventListener("click", () => addToNum(element.textContent));
+});
 
 op.forEach(element => {
         element.addEventListener("click", () => {
             active = true;
-            operator = element.textContent
+            operator = element.textContent;
             if(num1 && num2){
                 calc.disabled = false;
             }
             
         }
-        )
+        );
     }
-)
+);
 
 calc.addEventListener('click', () => {
-    operator = operators.get(operator)
-    result = operator(+num1, +num2)
-    console.log(result)
-    num1 = result
-    num2 = ''
+    operator = operators.get(operator);
+    result = operator(+num1, +num2);
+    console.log(result);
+    num1 = result;
+    num2 = '';
     calc.disabled = true;
     
     
 }
-)
+);
 
 clr.addEventListener('click', () => {
     num1 = '';
@@ -88,12 +87,12 @@ clr.addEventListener('click', () => {
     operator = '';
     result = '';
     active = false;
-    console.log(num1)
-    console.log(num2)
-    console.log(operator)
+    console.log(num1);
+    console.log(num2);
+    console.log(operator);
     
 }
-)
+);
 
 
 
