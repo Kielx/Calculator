@@ -27,15 +27,7 @@ const addToNum = function(text){
         calc.disabled = true;
         output.textContent = num1;
     }
-    if (num1 && num2 && operator){
-        
-        operator2 = operators.get(operator);
-        result = operator2(+num1, +num2);
-        output.textContent = result;
-        num2 = ''
-        num1 = output.textContent;
-        calc.disabled = true;
-    }
+
     console.log(`num1 ${num1}`);
     console.log(`num2 ${num2}`);
     console.log(`operator ${operator}`);
@@ -47,6 +39,7 @@ calc = document.querySelector('.calc');
 clr = document.querySelector('.clr');
 dot = document.querySelector('#dot');
 output = document.querySelector('#output');
+sign = document.querySelector('#sign');
 
 calc.disabled = true;
 let result;
@@ -83,7 +76,7 @@ op.forEach(element => {
             else{
                 output.textContent += operator;
             }
-
+            sign.textContent = operator;
             
         }
         );
