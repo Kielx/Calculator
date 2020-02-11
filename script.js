@@ -1,7 +1,6 @@
 let operations = {
     add : function(a,b){
-        return a + b;      
-        
+        return a+b;      
     },
 
     subtract : function(a,b){
@@ -60,9 +59,10 @@ op.forEach(element => {
         element.addEventListener("click", () => {
             active = true;
             operator = element.textContent;
-            if(num1 && num2){
+            if(num1 && num2 && operator){
                 calc.disabled = false;
             }
+
             
         }
         );
@@ -70,12 +70,12 @@ op.forEach(element => {
 );
 
 calc.addEventListener('click', () => {
-    operator = operators.get(operator);
-    result = operator(+num1, +num2);
+    operator2 = operators.get(operator);
+    result = operator2(+num1, +num2);
     console.log(result);
     num1 = result;
-    num2 = '';
-    calc.disabled = true;
+    
+    
     
     
 }
@@ -87,6 +87,7 @@ clr.addEventListener('click', () => {
     operator = '';
     result = '';
     active = false;
+    calc.disabled = true;
     console.log(num1);
     console.log(num2);
     console.log(operator);
