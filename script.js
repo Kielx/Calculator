@@ -27,7 +27,15 @@ const addToNum = function(text){
         calc.disabled = true;
         output.textContent = num1;
     }
-    
+    if (num1 && num2 && operator){
+        
+        operator2 = operators.get(operator);
+        result = operator2(+num1, +num2);
+        output.textContent = result;
+        num2 = ''
+        num1 = output.textContent;
+        calc.disabled = true;
+    }
     console.log(`num1 ${num1}`);
     console.log(`num2 ${num2}`);
     console.log(`operator ${operator}`);
@@ -87,7 +95,7 @@ calc.addEventListener('click', () => {
     result = operator2(+num1, +num2);
     console.log(result);
     num1 = result;
-    num2 = ''
+    num2 = '';
     dotActive = false;
     output.textContent = result;
     calc.disabled = true;
