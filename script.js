@@ -20,10 +20,12 @@ const addToNum = function(text){
     if (active){
         calc.disabled = false;
         num2+= text;
+        output.textContent = num2;
     }
     else{
         num1 += text ;
         calc.disabled = true;
+        output.textContent = num1;
     }
     
     console.log(`num1 ${num1}`);
@@ -35,14 +37,17 @@ num = document.querySelectorAll('.num');
 op = document.querySelectorAll('.op');
 calc = document.querySelector('.calc');
 clr = document.querySelector('.clr');
+dot = document.querySelector('#dot');
+output = document.querySelector('#output');
 
 calc.disabled = true;
-
 let result;
 let num1 = '';
 let operator = '';
 let num2 = '';
 let active = false;
+let dotActive = false;
+let operatorReady = false;
 
 let operators = new Map();
 operators.set('+', operations.add);
@@ -62,6 +67,14 @@ op.forEach(element => {
             if(num1 && num2 && operator){
                 calc.disabled = false;
             }
+            
+            
+            if (/[+\-/*]$/i.test(output.textContent) ){
+                output.textContent = output.textContent.replace(/[+\-/*]$/i, operator);
+            }
+            else{
+                output.textContent += operator;
+            }
 
             
         }
@@ -74,10 +87,11 @@ calc.addEventListener('click', () => {
     result = operator2(+num1, +num2);
     console.log(result);
     num1 = result;
-    
-    
-    
-    
+    num2 = ''
+    dotActive = false;
+    output.textContent = result;
+    calc.disabled = true;
+        
 }
 );
 
@@ -91,10 +105,21 @@ clr.addEventListener('click', () => {
     console.log(num1);
     console.log(num2);
     console.log(operator);
-    
+    output.textContent = 0;
+    dotActive = false;
 }
 );
 
 
-
+dot.addEventListener('click', () => 
+{   
+    if (dotActive){
+        return;
+    }
+    else{
+        addToNum('.');
+        dotActive = true;
+    }
+}
+);
 
