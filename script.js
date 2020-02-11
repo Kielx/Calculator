@@ -1,4 +1,4 @@
-let operations = {
+const operations = {
     add : function(a,b){
         return a+b;      
     },
@@ -16,6 +16,7 @@ let operations = {
     },
 };
 
+//Main calculate function
 const addToNum = function(text){
     if (active){
         calc.disabled = false;
@@ -27,40 +28,35 @@ const addToNum = function(text){
         calc.disabled = true;
         output.textContent = num1;
     }
-
-    console.log(`num1 ${num1}`);
-    console.log(`num2 ${num2}`);
-    console.log(`operator ${operator}`);
 };
 
-num = document.querySelectorAll('.num');
-op = document.querySelectorAll('.op');
-calc = document.querySelector('.calc');
-clr = document.querySelector('.clr');
-dot = document.querySelector('#dot');
-output = document.querySelector('#output');
-sign = document.querySelector('#sign');
+//Initial setup
 
-calc.disabled = true;
 let result;
 let num1 = '';
 let operator = '';
 let num2 = '';
 let active = false;
 let dotActive = false;
-let operatorReady = false;
-
 let operators = new Map();
+output = document.querySelector('#output');
+sign = document.querySelector('#sign');
+
+
+//Create map of operations
 operators.set('+', operations.add);
 operators.set('-', operations.subtract);
 operators.set('*', operations.multiply);
 operators.set('/', operations.divide);
 
 
+
+num = document.querySelectorAll('.num');
 num.forEach(element => {
     element.addEventListener("click", () => addToNum(element.textContent));
 });
 
+op = document.querySelectorAll('.op');
 op.forEach(element => {
         element.addEventListener("click", () => {
             active = true;
@@ -83,10 +79,11 @@ op.forEach(element => {
     }
 );
 
+calc = document.querySelector('.calc');
+calc.disabled = true;
 calc.addEventListener('click', () => {
     operator2 = operators.get(operator);
     result = operator2(+num1, +num2);
-    console.log(result);
     num1 = result;
     num2 = '';
     dotActive = false;
@@ -96,6 +93,7 @@ calc.addEventListener('click', () => {
 }
 );
 
+clr = document.querySelector('.clr');
 clr.addEventListener('click', () => {
     num1 = '';
     num2 = '';
@@ -103,15 +101,12 @@ clr.addEventListener('click', () => {
     result = '';
     active = false;
     calc.disabled = true;
-    console.log(num1);
-    console.log(num2);
-    console.log(operator);
     output.textContent = 0;
     dotActive = false;
 }
 );
 
-
+dot = document.querySelector('#dot');
 dot.addEventListener('click', () => 
 {   
     if (dotActive){
@@ -124,3 +119,10 @@ dot.addEventListener('click', () =>
 }
 );
 
+document.addEventListener('keydown', event => {
+    but = document.querySelector(`button[data-key="${event.keyCode}"]`)
+    if (but){
+        but.click();
+    }
+    
+})
